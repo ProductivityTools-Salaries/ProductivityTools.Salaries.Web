@@ -5,7 +5,7 @@ import apiService from '../services/apiService'
 function Home() {
 
     const [salaries, setSalaries] = useState([])
-    const [filter,setFilter]=useState([])
+    const [filter,setFilter]=useState({name:"",company:""})
 
     useEffect(() => {
         getSalaries();
@@ -41,10 +41,10 @@ function Home() {
                         <td>position</td>
                         <td>value</td>
                         <td>comment</td>
-                        <td>company</td>
+                        <td><input type="text" value={filter.company} onChange={e => setFilter({company: e.target.value})}/></td>
                         <td>.valueConfirmed</td>
                         <td>creationDate</td>
-                        <td><input type="text" value={filter} onChange={e => setFilter(e.target.value)}/></td>
+                        <td><input type="text" value={filter.name} onChange={e => setFilter({name: e.target.value})}/></td>
                         <td>source</td>
                         <td>expectation</td>
                         <td>b2b</td>
