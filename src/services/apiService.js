@@ -5,6 +5,12 @@ async function getSalaries(filter){
     return response.data;
 }
 
+async function saveSalary(salary){
+    const response=await axios.post('https://localhost:44322/Salary/Update',salary)
+    return response.data;
+}
+
 export default {
-    getSalaries
+    getSalaries,
+    saveSalary
 }
