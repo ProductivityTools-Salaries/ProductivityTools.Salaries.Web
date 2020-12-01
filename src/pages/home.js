@@ -61,7 +61,7 @@ function Home() {
                             <td>{item.name}</td>
                             <td>{item.source}</td>
                             <td>{item.expectation}</td>
-                            <td>{item.b2b}</td>
+                            <td>{item.b2b?<p>Yes</p>:<p>No</p>}</td>
                         </tr>
                     ))}
                 </table>
