@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import apiService from '../services/apiService'
 import Moment from 'react-moment';
+import { fields } from './fields'
 
 
 function Home() {
 
     const [salaries, setSalaries] = useState([])
-    const [filter,setFilter]=useState({name:"",company:""})
+    const [filter, setFilter] = useState({ name: "", company: "" })
 
     useEffect(() => {
         getSalaries(filter);
     }, []);
 
+    const applyFilters = e => {
+        debugger;
+        const { name, value } = e.target;
+
+        setFilter(prevState => ({
+            ...prevState, [name]: value
+        }))
+    }
+
     async function getSalaries(filter) {
+        debugger;
         const r = await apiService.getSalaries(filter);
         setSalaries(r);
     }
@@ -20,59 +31,31 @@ function Home() {
     return (
         <div>
             <div>
-                <button onClick={()=>getSalaries(filter)}>Get</button>
+                <button onClick={() => getSalaries(filter)}>Get</button>
             </div>
             <div>
                 <table>
                     <thead>
-                    <tr>
-                        <th>[SalaryId]</th>
-                        <th>[Position]</th>
-                        <th>[Value]</th>
-                        <th>[B2b]</th>
-                        <th>[Company]</th>
-                        <th>[CreationDate]</th>
-                        <th>[Source]</th>
-                        
-                        <th>[ValueConfirmed]</th>                 
-                        <th>[Name]</th>                
-                        <th>[Expectation]</th>
-                        <th>[Comment]</th>
-                        
-                    </tr>
-                    <tr>
-                        <td>salaryId</td>
-                        <td>position</td>
-                        <td>value</td>
-                        <td>b2b</td>
-                        <td><input type="text" value={filter.company} onChange={e => setFilter({company: e.target.value})}/></td>
-                        <td>creationDate</td>
-                        <td>source</td>
-                        
-                        <td>.valueConfirmed</td>
-                        <td><input type="text" value={filter.name} onChange={e => setFilter({name: e.target.value})}/></td>
-                        <td>expectation</td>
-                        <td>comment</td>
-                       
-                    </tr>
+                        <tr>
+                            {fields.map((field) => {
+                                return (<th>[{field.Label}]</th>)
+                            })}
+                        </tr>
+                        <tr>
+                            {fields.map((f) => {
+                                return (<td><input type={f.Type} name={f.Name} value={filter[f.field]} onChange={applyFilters} /></td>)
+                            })}
+                        </tr>
                     </thead>
                     <tbody>
-                    {salaries.map(item => (
-                        <tr key={item.salaryId}>
-                            <td>{item.salaryId}</td>
-                            <td>{item.position}</td>
-                            <td>{item.value}</td>
-                            <td>{item.b2b?<p>Yes</p>:<p>No</p>}</td>
-                            <td>{item.company}</td>
-                            <td><Moment format="YYYY.MM.DD">{item.creationDate}</Moment></td>
-                            <td>{item.source}</td>
-                            
-                            <td>{item.valueConfirmed}</td>
-                            <td>{item.name}</td>
-                            <td>{item.expectation}</td>    
-                            <td>{item.comment}</td>            
-                        </tr>
-                    ))}
+                        {salaries.map(item => (
+                            <tr key={item.salaryId}>
+                                {fields.map((f) => {
+                                    return <td>{item[f.field]}</td>
+                                })}
+                                <td><button>delete</button></td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
