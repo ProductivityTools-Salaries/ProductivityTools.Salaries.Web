@@ -33,10 +33,11 @@ function Home() {
                         <th>[Company]</th>
                         <th>[CreationDate]</th>
                         <th>[Source]</th>
-                        <th>[Comment]</th>
+                        
                         <th>[ValueConfirmed]</th>                 
                         <th>[Name]</th>                
                         <th>[Expectation]</th>
+                        <th>[Comment]</th>
                         
                     </tr>
                     <tr>
@@ -47,10 +48,11 @@ function Home() {
                         <td><input type="text" value={filter.company} onChange={e => setFilter({company: e.target.value})}/></td>
                         <td>creationDate</td>
                         <td>source</td>
-                        <td>comment</td>
+                        
                         <td>.valueConfirmed</td>
                         <td><input type="text" value={filter.name} onChange={e => setFilter({name: e.target.value})}/></td>
                         <td>expectation</td>
+                        <td>comment</td>
                        
                     </tr>
                     </thead>
@@ -64,10 +66,11 @@ function Home() {
                             <td>{item.company}</td>
                             <td><Moment format="YYYY.MM.DD">{item.creationDate}</Moment></td>
                             <td>{item.source}</td>
-                            <td>{item.comment}</td>
+                            
                             <td>{item.valueConfirmed}</td>
                             <td>{item.name}</td>
-                            <td>{item.expectation}</td>                
+                            <td>{item.expectation}</td>    
+                            <td>{item.comment}</td>            
                         </tr>
                     ))}
                     </tbody>
