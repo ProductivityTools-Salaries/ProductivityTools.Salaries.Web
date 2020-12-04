@@ -2,19 +2,31 @@ import React, { useState, useEffect } from 'react';
 import apiService from '../services/apiService'
 import Moment from 'react-moment';
 import { fields } from './fields'
+import Button from '@material-ui/core/Button';
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { useConfirm } from 'material-ui-confirm';
 
 
 function Home() {
 
     const [salaries, setSalaries] = useState([])
     const [filter, setFilter] = useState({ name: "", company: "" })
+    const confirm = useConfirm();
+
+    const handleDelete = (item) => {
+        confirm({ description: 'This will delete salary record from database.' })
+            .then(() => {
+                 apiService.removeSalary(item.salaryId); 
+                })
+            .catch(() => { /* ... */ });
+    };
 
     useEffect(() => {
         getSalaries(filter);
     }, []);
 
     const applyFilters = e => {
-        debugger;
         const { name, value } = e.target;
 
         setFilter(prevState => ({
@@ -23,7 +35,6 @@ function Home() {
     }
 
     async function getSalaries(filter) {
-        debugger;
         const r = await apiService.getSalaries(filter);
         setSalaries(r);
     }
@@ -53,7 +64,11 @@ function Home() {
                                 {fields.map((f) => {
                                     return <td>{item[f.field]}</td>
                                 })}
-                                <td><button>delete</button></td>
+                                <td>
+                                    <IconButton onClick={() => handleDelete(item)}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
