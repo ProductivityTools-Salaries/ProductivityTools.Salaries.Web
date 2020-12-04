@@ -3,29 +3,24 @@ import apiService from '../services/apiService'
 
 function Edit() {
 
-    const [salary, setSalary] = useState({ name: "", b2b: false,valueConfirmed:1 })
+    const [salary, setSalary] = useState({ name: "", b2b: false, valueConfirmed: 1 })
+
+    const f = (type, value, checked) => {
+        debugger;
+        switch (type) {
+            case "checkbox": return checked;
+            case "number": return Number(value);
+            default: return value;
+        }
+    }
 
     const handleChange = e => {
-        const { name, value } = e.target;
+        const { name, value, type, checked } = e.target;
+        debugger
         setSalary(prevState => ({
             ...prevState,
-            [name]: value
-        }));
-    }
+            [name]: f(type, value, checked)
 
-    const handleChangeBool = e => {
-        const { name, checked } = e.target;
-        setSalary(prevState => ({
-            ...prevState,
-            [name]: checked
-        }));
-    }
-
-    const handleChangeNumber = e => {
-        const { name, value } = e.target;
-        setSalary(prevState => ({
-            ...prevState,
-            [name]: Number(value)
         }));
     }
 
@@ -64,7 +59,7 @@ function Edit() {
                 </tr>
                 <tr>
                     <td>ValueConfirmed</td>
-                    <td><input type="number" name="valueConfirmed" value={salary.valueConfirmed}  onChange={handleChangeNumber}/> </td>
+                    <td><input type="number" name="valueConfirmed" value={salary.valueConfirmed} onChange={handleChange} /> </td>
                 </tr>
                 <tr>
                     <td>CreationDate</td>
@@ -80,11 +75,11 @@ function Edit() {
                 </tr>
                 <tr>
                     <td>Expectation</td>
-                    <td><input type="number" name="expectation" value={salary.expectation} onChange={handleChange} /> </td>
+                    <td><input type="text" name="expectation" value={salary.expectation} onChange={handleChange} /> </td>
                 </tr>
                 <tr>
                     <td>B2b</td>
-                    <td><input type="checkbox" name="b2b" checked={salary.b2b} onChange={handleChangeBool} /> </td>
+                    <td><input type="checkbox" name="b2b" checked={salary.b2b} onChange={handleChange} /> </td>
                 </tr>
             </table>
             <button onClick={() => saveSalary(salary)}>Save</button>
