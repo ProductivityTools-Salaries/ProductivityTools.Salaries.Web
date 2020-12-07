@@ -3,6 +3,8 @@ import apiService from '../services/apiService'
 import Moment from 'react-moment';
 import { fields } from './fields'
 import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useConfirm } from 'material-ui-confirm';
@@ -28,19 +30,28 @@ function Home() {
         getSalaries(filter);
     }, []);
 
-    const applyFiltersTyped = (type, value, checked) => {
+    const checkboxFilter=(value)=>{
+        switch (value) {
+            case "true": return true;
+            case "false": return false;
+            default: return undefined;
+        }
+    }
+
+    const applyFiltersTyped = (type, value) => {
         switch (type) {
-            case "checkbox": return checked;
+            case "checkbox": return checkboxFilter(value);
             case "number": return Number(value);
             default: return value;
         }
     }
 
-    const applyFilters = e => {
-        const { name, value, type, checked } = e.target;
+    const applyFilters = (e,type) => {
+        const { name, value } = e.target;
         debugger;
+       
         setFilter(prevState => ({
-            ...prevState, [name]: applyFiltersTyped(type, value, checked)
+            ...prevState, [name]: applyFiltersTyped(type, value)
         }))
     }
 
@@ -53,6 +64,17 @@ function Home() {
         setSalaries(r);
     }
 
+    const createFilter = f => {
+        if (f.Type == "checkbox") {
+            return (
+            <Select width="100px" id="select" name={f.Name} data-type='pawel' value={filter[f.field]} onChange={(e)=>applyFilters(e,f.Type)}>
+                <MenuItem value="">Both</MenuItem>
+                <MenuItem value="true">Yes</MenuItem>
+                <MenuItem value="false">No</MenuItem>
+            </Select>)
+        }
+        return (<input style={{ width: f.width }} name={f.Name} value={filter[f.field]} onChange={(e)=>applyFilters(e,f.Type)} />)
+    }
 
 
     return (
@@ -72,7 +94,7 @@ function Home() {
                         <tr>
                             {fields.map((f) => {
                                 if (f.filtered) {
-                                    return (<td><input style={{ width: f.width }} type={f.Type} name={f.Name} value={filter[f.field]} onChange={applyFilters} /></td>)
+                                    return (<td>{createFilter(f)}</td>)
                                 }
                                 else {
                                     return (<td>{f.Label}</td>)
