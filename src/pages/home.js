@@ -15,10 +15,11 @@ function Home() {
     const history = useHistory()
     const confirm = useConfirm();
 
-    const handleDelete = (item) => {
+    const handleDelete = async (item) => {
         confirm({ description: 'This will delete salary record from database.' })
-            .then(() => {
-                apiService.removeSalary(item.salaryId);
+            .then(async () => {
+                await apiService.removeSalary(item.salaryId);
+                getSalaries(filter);
             })
             .catch(() => { /* ... */ });
     };
@@ -27,11 +28,19 @@ function Home() {
         getSalaries(filter);
     }, []);
 
-    const applyFilters = e => {
-        const { name, value } = e.target;
+    const applyFiltersTyped = (type, value, checked) => {
+        switch (type) {
+            case "checkbox": return checked;
+            case "number": return Number(value);
+            default: return value;
+        }
+    }
 
+    const applyFilters = e => {
+        const { name, value, type, checked } = e.target;
+        debugger;
         setFilter(prevState => ({
-            ...prevState, [name]: value
+            ...prevState, [name]: applyFiltersTyped(type, value, checked)
         }))
     }
 
@@ -63,7 +72,7 @@ function Home() {
                         <tr>
                             {fields.map((f) => {
                                 if (f.filtered) {
-                                    return (<td><input type={f.Type} name={f.Name} value={filter[f.field]} onChange={applyFilters} /></td>)
+                                    return (<td><input style={{ width: f.width }} type={f.Type} name={f.Name} value={filter[f.field]} onChange={applyFilters} /></td>)
                                 }
                                 else {
                                     return (<td>{f.Label}</td>)
@@ -80,7 +89,6 @@ function Home() {
                                     }
                                     else {
                                         if (f.Type == "checkbox") {
-                                            debugger;
                                             return <td>{Number(item.b2b)}</td>
                                         }
                                         else {
