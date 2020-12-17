@@ -6,7 +6,13 @@ async function getSalaries(filter) {
 }
 
 async function saveSalary(salary) {
-    const response = await axios.post('https://localhost:44322/Salary/Add', salary)
+    const response = await axios.post('https://localhost:44322/Salary/Save', salary)
+    return response.data;
+}
+
+async function getSalary(id){
+    var address='https://localhost:44322/Salary/Get?salaryId='+id;
+    const response = await axios.post(address, {})
     return response.data;
 }
 
@@ -20,5 +26,6 @@ async function removeSalary(id) {
 export default {
     getSalaries,
     saveSalary,
-    removeSalary
+    removeSalary,
+    getSalary
 }

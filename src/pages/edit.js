@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import apiService from '../services/apiService'
-import {fields} from './fields'
+import { fields } from './fields'
 import Button from '@material-ui/core/Button';
 
-function Edit() {
+function Edit(params) {
 
+    debugger;
     const [salary, setSalary] = useState({ name: "", b2b: false, valueConfirmed: 1 })
-    const f = (type, value, checked) => {
+
+    useEffect(() => {
+        var salaryid = params.match.params.salaryId;
+        getSalary(salaryid);
+    }, []);
+
+
+    async function getSalary(id) {
         debugger;
+        var result = await apiService.getSalary(id);
+        setSalary(result);
+    }
+
+
+    const f = (type, value, checked) => {
         switch (type) {
             case "checkbox": return checked;
             case "number": return Number(value);
@@ -26,7 +40,6 @@ function Edit() {
     }
 
     async function saveSalary() {
-        debugger;
         await apiService.saveSalary(salary);
     }
 
@@ -38,9 +51,9 @@ function Edit() {
                 return (
                     <p style={{ margin: "0px" }}>
                         <div style={{ float: "left", width: "200px" }}>{item.Label}</div>
-                        <input style={{ width: "200px" }} type={item.Type} name={item.Name} value={salary[item.field]} onChange={handleChange} readOnly={item.readonly}  />
+                        <input style={{ width: "200px" }} type={item.Type} name={item.Name} value={salary[item.field]} onChange={handleChange} readOnly={item.readonly} />
                     </p>)
-            })} 
+            })}
             <Button onClick={() => saveSalary(salary)} color="primary" variant="contained">Save</Button>
         </div>
     )

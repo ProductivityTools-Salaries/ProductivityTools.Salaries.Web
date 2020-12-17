@@ -13,7 +13,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/Add" component={Edit} />
-          <Route path="/Edit" component={Edit} />
+          <Route path="/Edit/:salaryId" component={Edit} />
           <Route path="/" component={Home} />
         </Switch>
       </Router>

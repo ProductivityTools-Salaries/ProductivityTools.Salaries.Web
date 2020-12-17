@@ -7,8 +7,9 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 import { useConfirm } from 'material-ui-confirm';
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 function Home() {
 
@@ -26,11 +27,15 @@ function Home() {
             .catch(() => { /* ... */ });
     };
 
+    const handleEdit = async (item) => {
+        history.push('/Edit/'+item.salaryId)
+    };
+
     useEffect(() => {
         getSalaries(filter);
     }, []);
 
-    const checkboxFilter=(value)=>{
+    const checkboxFilter = (value) => {
         switch (value) {
             case "true": return true;
             case "false": return false;
@@ -46,10 +51,10 @@ function Home() {
         }
     }
 
-    const applyFilters = (e,type) => {
+    const applyFilters = (e, type) => {
         const { name, value } = e.target;
         debugger;
-       
+
         setFilter(prevState => ({
             ...prevState, [name]: applyFiltersTyped(type, value)
         }))
@@ -65,15 +70,15 @@ function Home() {
     }
 
     const createFilter = f => {
-        if (f.Type == "checkbox") {
+        if (f.field == "b2b") {
             return (
-            <Select width="100px" id="select" name={f.Name} data-type='pawel' value={filter[f.field]} onChange={(e)=>applyFilters(e,f.Type)}>
-                <MenuItem value="">Both</MenuItem>
-                <MenuItem value="true">Yes</MenuItem>
-                <MenuItem value="false">No</MenuItem>
-            </Select>)
+                <Select width="100px" id="select" name={f.Name} data-type='pawel' value={filter[f.field]} onChange={(e) => applyFilters(e, f.Type)}>
+                    <MenuItem value="">Both</MenuItem>
+                    <MenuItem value="true">Yes</MenuItem>
+                    <MenuItem value="false">No</MenuItem>
+                </Select>)
         }
-        return (<input style={{ width: f.width }} name={f.Name} value={filter[f.field]} onChange={(e)=>applyFilters(e,f.Type)} />)
+        return (<input style={{ width: f.width }} name={f.Name} value={filter[f.field]} onChange={(e) => applyFilters(e, f.Type)} />)
     }
 
 
@@ -118,10 +123,15 @@ function Home() {
                                         }
                                     }
                                 })}
-                                <td>
-                                    <IconButton onClick={() => handleDelete(item)}>
-                                        <DeleteIcon />
-                                    </IconButton>
+                                <td >
+                                    <span>
+                                        <Link onClick={() => handleEdit(item)}>Edit</Link> 
+                                    </span>
+                                </td>
+                                <td >
+                                    <span>
+                                    <Link onClick={() => handleDelete(item)}>Delete</Link>
+                                    </span>
                                 </td>
                             </tr>
                         ))}
