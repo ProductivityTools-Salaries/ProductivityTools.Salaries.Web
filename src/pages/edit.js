@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import apiService from '../services/apiService'
 import { fields } from './fields'
 import Button from '@material-ui/core/Button';
+import {  useHistory } from 'react-router-dom'
 
 function Edit(params) {
 
     debugger;
     const [salary, setSalary] = useState({ name: "", b2b: false, valueConfirmed: 1 })
+    const history = useHistory()
 
     useEffect(() => {
         var salaryid = params.match.params.salaryId;
@@ -41,6 +43,7 @@ function Edit(params) {
 
     async function saveSalary() {
         await apiService.saveSalary(salary);
+        history.push('/')
     }
 
     return (
