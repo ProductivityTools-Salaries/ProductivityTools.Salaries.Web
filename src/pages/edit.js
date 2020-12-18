@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import apiService from '../services/apiService'
 import { fields } from './fields'
 import Button from '@material-ui/core/Button';
-import {  useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 function Edit(params) {
 
@@ -15,13 +15,11 @@ function Edit(params) {
         getSalary(salaryid);
     }, []);
 
-
     async function getSalary(id) {
         debugger;
         var result = await apiService.getSalary(id);
         setSalary(result);
     }
-
 
     const f = (type, value, checked) => {
         switch (type) {
