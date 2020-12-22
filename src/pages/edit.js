@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 
 function Edit(params) {
 
-    debugger;
+    
     const [salary, setSalary] = useState({ name: "", b2b: false, valueConfirmed: 1 })
     const history = useHistory()
 
@@ -16,7 +16,7 @@ function Edit(params) {
     }, []);
 
     async function getSalary(id) {
-        debugger;
+        
         var result = await apiService.getSalary(id);
         setSalary(result);
     }
@@ -31,8 +31,7 @@ function Edit(params) {
 
     const handleChange = e => {
         const { name, value, type, checked } = e.target;
-        debugger
-        setSalary(prevState => ({
+                setSalary(prevState => ({
             ...prevState,
             [name]: f(type, value, checked)
 
@@ -50,9 +49,9 @@ function Edit(params) {
             <div>Value</div>
             {fields.map((item) => {
                 return (
-                    <p style={{ margin: "0px" }}>
-                        <div style={{ float: "left", width: "200px" }}>{item.Label}</div>
-                        <input style={{ width: "200px" }} type={item.Type} name={item.Name} value={salary[item.field]} onChange={handleChange} readOnly={item.readonly} />
+                    <p style={{ margin: "0px" }} key={item.field}>
+                        <span style={{ float: "left", width: "200px" }}>{item.Label}</span>
+                        <input style={{ width: "200px" }} type={item.Type} name={item.Name} value={salary[item.field]||""} onChange={handleChange} readOnly={item.readonly} />
                     </p>)
             })}
             <Button onClick={() => saveSalary(salary)} color="primary" variant="contained">Save</Button>
