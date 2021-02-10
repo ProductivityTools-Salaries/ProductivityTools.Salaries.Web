@@ -66,7 +66,6 @@ function Home() {
 
     const applyFilters = (e, type) => {
         const { name, value } = e.target;
-        debugger;
 
         setFilter(prevState => ({
             ...prevState, [name]: applyFiltersTyped(type, value)

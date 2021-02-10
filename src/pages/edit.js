@@ -18,6 +18,7 @@ function Edit(params) {
     async function getSalary(id) {
         
         var result = await apiService.getSalary(id);
+        result.creationDate=result.creationDate.split('T')[0]
         setSalary(result);
     }
 
