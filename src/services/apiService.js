@@ -1,9 +1,15 @@
 import axios from 'axios'
 import {config} from '../Consts'
+import {AuthService} from './authService'
 
 async function getSalaries(filter) {
-    const response = await axios.post(`${config.path_base}/Salary/List`, filter)
-    return response.data;
+
+    let call=async(header)=>{
+        const response=await axios.post(`${config.path_base}/Salary/List`, filter, header)
+        return response.data;
+    }
+
+    return callAuthorizedEndpoint(call);
 }
 
 async function saveSalary(salary) {
@@ -22,6 +28,32 @@ async function removeSalary(id) {
     debugger;
     const response = await axios.post(address, {})
     return response.data;
+}
+
+
+async function callAuthorizedEndpoint(call) {
+    let authService = new AuthService();
+    return await authService.getUser().then(async user => {
+        if (user && user.access_token) {
+            const header = {
+                headers: { Authorization: `Bearer ${user.access_token}` }
+            };
+            try {
+                const result = await call(header);
+                return result;
+            }
+            catch (error) {
+                if (error.response != null && error.response.status === 401) {
+                    console.log("try to renew token");
+                    console.log("more code needed");
+                }
+            }
+        }
+        else {
+            console.log("user not in the storage, cannot perform authorized call, trying normal call");
+            return await call();
+        }
+    })
 }
 
 export default {

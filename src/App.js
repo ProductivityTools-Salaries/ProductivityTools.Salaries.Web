@@ -4,12 +4,14 @@ import logo from './logo.svg';
 import './App.css';
 import Home from './pages/home'
 import Edit from './pages/edit'
+import DateCheck from './components/DateCheck'
 
 
 function App() {
 
   return (
     <ConfirmProvider>
+      <DateCheck/>
       <Router>
         <Switch>
           <Route path="/Add" component={Edit} />
