@@ -1,7 +1,8 @@
 import axios from 'axios'
+import {config} from '../Consts'
 
 async function getSalaries(filter) {
-    const response = await axios.post('https://localhost:44322/Salary/List', filter)
+    const response = await axios.post(`${config.path_base}/Salary/List`, filter)
     return response.data;
 }
 
@@ -11,13 +12,13 @@ async function saveSalary(salary) {
 }
 
 async function getSalary(id){
-    var address='https://localhost:44322/Salary/Get?salaryId='+id;
+    var address=`${config.path_base}/Salary/Get?salaryId=`+id;
     const response = await axios.post(address, {})
     return response.data;
 }
 
 async function removeSalary(id) {
-    var address='https://localhost:44322/Salary/Remove?salaryId='+id;
+    var address=`${config.path_base}/Salary/Remove?salaryId=`+id;
     debugger;
     const response = await axios.post(address, {})
     return response.data;
