@@ -30,6 +30,11 @@ async function removeSalary(id) {
     return response.data;
 }
 
+async function getDate(){
+    const response = await axios.post(`${config.path_base}/Date/GetDate`)
+    return response.data;
+}
+
 
 async function callAuthorizedEndpoint(call) {
     let authService = new AuthService();
@@ -60,5 +65,6 @@ export default {
     getSalaries,
     saveSalary,
     removeSalary,
-    getSalary
+    getSalary,
+    getDate
 }
