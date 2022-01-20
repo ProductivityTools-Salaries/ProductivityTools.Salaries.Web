@@ -29,6 +29,8 @@ export class AuthService {
     }
 
     logout = () => {
-        return this.userManager.logout();
+        debugger;
+        console.log("userManager.logout");
+        return this.userManager.signoutRedirect();
     }
 }

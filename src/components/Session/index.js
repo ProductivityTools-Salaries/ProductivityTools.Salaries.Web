@@ -1,25 +1,42 @@
 import React from 'react'
+import { useState,useEffect } from 'react'
 import { AuthService } from '../../services/authService'
 
-export default function Session(){
+export default function Session() {
 
 
-    let authService=new AuthService();
+    let authService = new AuthService();
 
-    const login=()=>{
+    const [user, setUser] = useState(null);
+
+
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    const getUser = () => {
+        authService.getUser().then(user => {
+            debugger;
+            setUser(user);
+        })
+    }
+
+
+    const login = () => {
         console.log("login");
         debugger;
         authService.login();
     }
 
-    const logout=()=>{
+    const logout = () => {
         authService.logout();
     }
 
-    return(
+    return (
         <span>
             <button onClick={login}>Login</button>
             <button onClick={logout}>Logout</button>
+            <span>User:{user ? user.profile.sid : "is missing in session"}</span>
         </span>
     )
 }

@@ -11,4 +11,3 @@ export const fields = [
     { Label: "ValueConfirmed", Type: "number", Name: "valueConfirmed", field: "valueConfirmed", readonly: false, filtered: false, width: '50px' },
 ]
 
-export default { fields, }
