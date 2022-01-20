@@ -131,7 +131,7 @@ function Home() {
                         </tr>
                     </thead>
                     <tbody>
-                        {salaries.map(item => (
+                        {salaries && salaries.map(item => (
                             <tr key={item.salaryId}>
                                 {fields.map((f) => {
                                     if (f.Type == "date") {
