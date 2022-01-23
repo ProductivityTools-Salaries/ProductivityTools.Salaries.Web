@@ -7,10 +7,10 @@ const dev = {
 }
 
 const prod = {
-    clientId:"devsalariesweb",
-    path_base:'https://localhost:5001',
+    clientId:"prdsalariesweb",
+    path_base:'https://apisalaries:8060/',
     stsAuthority: 'https://identityserver.productivitytools.tech:8010/',
-    clientRoot:'http://localhost:3000/',
+    clientRoot:'https://salariesweb.z35.web.core.windows.net/',
     clientScope:'openid profile Salaries.API'
 }
 
