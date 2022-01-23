@@ -6,7 +6,7 @@ const dev = {
     clientScope:'openid profile Salaries.API'
 }
 
-const prd = {
+const prod = {
     clientId:"devsalariesweb",
     path_base:'https://localhost:5001',
     stsAuthority: 'https://identityserver.productivitytools.tech:8010/',
