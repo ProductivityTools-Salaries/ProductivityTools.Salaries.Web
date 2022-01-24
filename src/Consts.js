@@ -7,7 +7,7 @@ const dev = {
 }
 
 const prod = {
-    clientId:"prdsalariesweb",
+    clientId:"prodsalariesweb",
     path_base:'https://apisalaries:8060/',
     stsAuthority: 'https://identityserver.productivitytools.tech:8010/',
     clientRoot:'https://salariesweb.z35.web.core.windows.net/',
