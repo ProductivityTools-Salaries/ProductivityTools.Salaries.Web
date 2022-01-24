@@ -11,15 +11,16 @@ function App() {
 
   return (
     <ConfirmProvider>
-      <DateCheck/>
-      <Session/>
-      <Router>
-        <Switch>
-          <Route path="/Add" component={Edit} />
-          <Route path="/Edit/:salaryId" component={Edit} />
-          <Route path="/" component={Home} />
-        </Switch>
-      </Router>
+      <DateCheck />
+      <Session>
+        <Router>
+          <Switch>
+            <Route path="/Add" component={Edit} />
+            <Route path="/Edit/:salaryId" component={Edit} />
+            <Route path="/" component={Home} />
+          </Switch>
+        </Router>
+      </Session>
     </ConfirmProvider>
   );
 }
