@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ConfirmProvider } from 'material-ui-confirm';
+import {config} from './Consts.js'
 import './App.css';
 import Home from './pages/home'
 import Edit from './pages/edit'
@@ -12,6 +13,7 @@ function App() {
   return (
     <ConfirmProvider>
       <DateCheck />
+      <p>{config.clientId}</p>
       <Session>
         <Router>
           <Switch>
