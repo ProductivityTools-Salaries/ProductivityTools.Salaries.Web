@@ -13,7 +13,7 @@ async function getSalaries(filter) {
 }
 
 async function saveSalary(salary) {
-    const response = await axios.post('https://localhost:44322/Salary/Save', salary)
+    const response = await axios.post(`${config.path_base}/Salary/Save`, salary)
     return response.data;
 }
 
