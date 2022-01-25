@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {config} from '../Consts'
+import {toast } from 'react-toastify';
 import {AuthService} from './authService'
 
 async function getSalaries(filter) {
@@ -9,7 +10,7 @@ async function getSalaries(filter) {
         return response.data;
     }
 
-    return callAuthorizedEndpoint(call);
+    return callAuthorizedEndpointWithToast(call,"Waiting for salary list", "Salary list returned");
 }
 
 async function saveSalary(salary) {
@@ -36,6 +37,17 @@ async function getDate(){
 }
 
 
+async function callAuthorizedEndpointWithToast(call, pendingMessage, successMessage) {
+    return toast.promise(
+         callAuthorizedEndpoint(call),
+         {
+             pending: pendingMessage ? pendingMessage : "Missing pending message",
+             success: successMessage ? successMessage : "Missing sucesss message",
+             error: 'something happned!!!!'
+         }
+     )
+ }
+
 async function callAuthorizedEndpoint(call) {
     let authService = new AuthService();
     return await authService.getUser().then(async user => {
@@ -52,6 +64,7 @@ async function callAuthorizedEndpoint(call) {
                     authService.logout();
                     console.log("more code needed");
                 }
+                throw error;
             }
         }
         else {
