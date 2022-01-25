@@ -49,7 +49,7 @@ async function callAuthorizedEndpoint(call) {
             }
             catch (error) {
                 if (error.response != null && error.response.status === 401) {
-                    console.log("try to renew token");
+                    authService.logout();
                     console.log("more code needed");
                 }
             }
