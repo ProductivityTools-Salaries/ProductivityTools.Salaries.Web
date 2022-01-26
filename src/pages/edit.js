@@ -44,6 +44,10 @@ function Edit(params) {
         history.push('/')
     }
 
+    async function cancel(){
+        history.push('/');
+    }
+
     return (
         <div>
             <div style={{ float: "left", width: "200px" }}>Item</div>
@@ -56,6 +60,7 @@ function Edit(params) {
                     </p>)
             })}
             <Button onClick={() => saveSalary(salary)} color="primary" variant="contained">Save</Button>
+            <Button onClick={cancel} color="secondary" variant="contained">Cancel</Button>
         </div>
     )
 }
