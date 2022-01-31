@@ -9,30 +9,34 @@ async function getSalaries(filter) {
         const response = await axios.post(`${config.path_base}/Salary/List`, filter, header)
         return response.data;
     }
-
     return callAuthorizedEndpointWithToast(call, "Waiting for salary list", "Salary list returned");
 }
 
 async function saveSalary(salary) {
-    const response = await axios.post(`${config.path_base}/Salary/Save`, salary)
-    return response.data;
+
+    let call = async (header) => {
+        const response = await axios.post(`${config.path_base}/Salary/Save`, salary, header)
+        return response.data;
+    }
+    return callAuthorizedEndpointWithToast(call, "Send save salary", "Salary saved");
 }
 
 async function getSalary(id) {
-
     let call = async (header) => {
         var address = `${config.path_base}/Salary/Get?salaryId=` + id;
         const response = await axios.post(address, {}, header)
         return response.data;
     }
-    return callAuthorizedEndpointWithToast(call,"Save request sent","Save done");
+    return callAuthorizedEndpointWithToast(call, "Save request sent", "Save done");
 }
 
 async function removeSalary(id) {
-    var address = `${config.path_base}/Salary/Remove?salaryId=` + id;
-    debugger;
-    const response = await axios.post(address, {})
-    return response.data;
+    let call=async(header)=>{
+        var address = `${config.path_base}/Salary/Remove?salaryId=` + id;
+        const response = await axios.post(address, {}, header)
+        return response.data;
+    }
+   return callAuthorizedEndpointWithToast(call, "Remove salary request sent", "Remove done");
 }
 
 async function getDate() {
