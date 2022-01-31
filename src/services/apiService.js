@@ -1,16 +1,16 @@
 import axios from 'axios'
-import {config} from '../Consts'
-import {toast } from 'react-toastify';
-import {AuthService} from './authService'
+import { config } from '../Consts'
+import { toast } from 'react-toastify';
+import { AuthService } from './authService'
 
 async function getSalaries(filter) {
 
-    let call=async(header)=>{
-        const response=await axios.post(`${config.path_base}/Salary/List`, filter, header)
+    let call = async (header) => {
+        const response = await axios.post(`${config.path_base}/Salary/List`, filter, header)
         return response.data;
     }
 
-    return callAuthorizedEndpointWithToast(call,"Waiting for salary list", "Salary list returned");
+    return callAuthorizedEndpointWithToast(call, "Waiting for salary list", "Salary list returned");
 }
 
 async function saveSalary(salary) {
@@ -18,20 +18,24 @@ async function saveSalary(salary) {
     return response.data;
 }
 
-async function getSalary(id){
-    var address=`${config.path_base}/Salary/Get?salaryId=`+id;
-    const response = await axios.post(address, {})
-    return response.data;
+async function getSalary(id) {
+
+    let call = async (header) => {
+        var address = `${config.path_base}/Salary/Get?salaryId=` + id;
+        const response = await axios.post(address, {}, header)
+        return response.data;
+    }
+    return callAuthorizedEndpointWithToast(call,"Save request sent","Save done");
 }
 
 async function removeSalary(id) {
-    var address=`${config.path_base}/Salary/Remove?salaryId=`+id;
+    var address = `${config.path_base}/Salary/Remove?salaryId=` + id;
     debugger;
     const response = await axios.post(address, {})
     return response.data;
 }
 
-async function getDate(){
+async function getDate() {
     const response = await axios.post(`${config.path_base}/Date/GetDate`)
     return response.data;
 }
@@ -39,14 +43,14 @@ async function getDate(){
 
 async function callAuthorizedEndpointWithToast(call, pendingMessage, successMessage) {
     return toast.promise(
-         callAuthorizedEndpoint(call),
-         {
-             pending: pendingMessage ? pendingMessage : "Missing pending message",
-             success: successMessage ? successMessage : "Missing sucesss message",
-             error: 'something happned!!!!'
-         }
-     )
- }
+        callAuthorizedEndpoint(call),
+        {
+            pending: pendingMessage ? pendingMessage : "Missing pending message",
+            success: successMessage ? successMessage : "Missing sucesss message",
+            error: 'something happned!!!!'
+        }
+    )
+}
 
 async function callAuthorizedEndpoint(call) {
     let authService = new AuthService();
