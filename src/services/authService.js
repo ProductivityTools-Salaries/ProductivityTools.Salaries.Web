@@ -21,6 +21,7 @@ export class AuthService {
     }
 
     getUser = () => {
+        console.log("user l")
         return this.userManager.getUser();
     }
 

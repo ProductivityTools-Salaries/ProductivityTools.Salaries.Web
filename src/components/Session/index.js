@@ -10,11 +10,13 @@ export default function Session(props) {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
+        console.log("user l")
         getUser();
-    });
+    }, []);
 
     const getUser = () => {
         authService.getUser().then(user => {
+            console.log("user l")
             setUser(user);
         })
     }

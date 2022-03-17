@@ -114,18 +114,18 @@ function Home() {
                         <tr>
                             {fields.map((field) => {
                                 return (
-                                    <th>
-                                        <Link onClick={() => applyOrder(field)}>  {field.Label}</Link>
+                                    <th key={field.field}>
+                                        <a href="#" onClick={() => applyOrder(field)}>  {field.Label}</a>
                                     </th>)
                             })}
                         </tr>
                         <tr>
                             {fields.map((f) => {
                                 if (f.filtered) {
-                                    return (<td>{createFilter(f)}</td>)
+                                    return (<td key={f.field}>{createFilter(f)}</td>)
                                 }
                                 else {
-                                    return (<td>{f.Label}</td>)
+                                    return (<td key={f.field}>{f.Label}</td>)
                                 }
                             })}
                         </tr>
@@ -135,25 +135,25 @@ function Home() {
                             <tr key={item.salaryId}>
                                 {fields.map((f) => {
                                     if (f.Type === "date") {
-                                        return <td><Moment format="YYYY.MM.DD">{item[f.field]}</Moment></td>
+                                        return <td key={f.field}><Moment format="YYYY.MM.DD">{item[f.field]}</Moment></td>
                                     }
                                     else {
                                         if (f.Type === "checkbox") {
-                                            return <td>{Number(item.b2b)}</td>
+                                            return <td  key={f.field}>{Number(item.b2b)}</td>
                                         }
                                         else {
-                                            return <td>{item[f.field]}</td>
+                                            return <td  key={f.field}>{item[f.field]}</td>
                                         }
                                     }
                                 })}
                                 <td >
                                     <span>
-                                        <Link onClick={() => handleEdit(item)}>Edit</Link>
+                                        <a href="#" onClick={() => handleEdit(item)}>Edit</a>
                                     </span>
                                 </td>
                                 <td >
                                     <span>
-                                        <Link onClick={() => handleDelete(item)}>Delete</Link>
+                                        <a href="#" onClick={() => handleDelete(item)}>Delete</a>
                                     </span>
                                 </td>
                             </tr>
