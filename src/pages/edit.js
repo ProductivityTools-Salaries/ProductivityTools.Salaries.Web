@@ -13,7 +13,7 @@ function Edit(params) {
     useEffect(() => {
         var salaryid = params.match.params.salaryId;
         getSalary(salaryid);
-    }, []);
+    }, [params.match.params.salaryId]);
 
     async function getSalary(id) {
         

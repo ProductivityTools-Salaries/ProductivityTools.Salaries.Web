@@ -82,10 +82,12 @@ async function callAuthorizedEndpoint(call) {
     })
 }
 
-export default {
+const exportedObject={
     getSalaries,
     saveSalary,
     removeSalary,
     getSalary,
     getDate
 }
+
+export default exportedObject

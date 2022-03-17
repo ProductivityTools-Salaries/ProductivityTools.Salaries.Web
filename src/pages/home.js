@@ -52,12 +52,12 @@ function Home() {
         debugger;
         if (filter.orderBy == null) {
             setFilter(prevState => ({
-                ...prevState, ['orderBy']: field.field, ['OrderByDescending']: null
+                ...prevState, 'orderBy': field.field, 'OrderByDescending': null
             }))
         }
         else {
             setFilter(prevState => ({
-                ...prevState, ['orderBy']: null, ['OrderByDescending']: field.field
+                ...prevState, 'orderBy': null, 'OrderByDescending': field.field
             }))
         }
         getSalaries(filter);
@@ -89,7 +89,7 @@ function Home() {
 
 
     const createFilter = f => {
-        if (f.field == "b2b") {
+        if (f.field === "b2b") {
             return (
                 <Select width="100px" id="select" name={f.Name} data-type='pawel' value={filter[f.field]} onChange={(e) => applyFilters(e, f.Type)}>
                     <MenuItem value="">Both</MenuItem>
@@ -134,11 +134,11 @@ function Home() {
                         {salaries && salaries.map(item => (
                             <tr key={item.salaryId}>
                                 {fields.map((f) => {
-                                    if (f.Type == "date") {
+                                    if (f.Type === "date") {
                                         return <td><Moment format="YYYY.MM.DD">{item[f.field]}</Moment></td>
                                     }
                                     else {
-                                        if (f.Type == "checkbox") {
+                                        if (f.Type === "checkbox") {
                                             return <td>{Number(item.b2b)}</td>
                                         }
                                         else {

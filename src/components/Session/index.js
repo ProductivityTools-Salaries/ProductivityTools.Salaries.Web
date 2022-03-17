@@ -11,13 +11,10 @@ export default function Session(props) {
 
     useEffect(() => {
         getUser();
-        
-
-    }, []);
+    });
 
     const getUser = () => {
         authService.getUser().then(user => {
-            debugger;
             setUser(user);
         })
     }
