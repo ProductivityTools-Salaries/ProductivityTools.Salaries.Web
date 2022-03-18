@@ -1,29 +1,31 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useRef } from 'react'
 import { AuthService } from '../../services/authService'
 
 export default function Session(props) {
 
 
-    let authService = new AuthService();
-    const [mounted,setMounted]=useState(true);
+    let authService = useRef(null);
+    const [mounted, setMounted] = useState(false);
     const [user, setUser] = useState(null);
 
 
     useEffect(() => {
+        authService.current = new AuthService();
         console.log("use effect")
-        authService.getUser().then(user => {
+        authService.current.getUser().then(user => {
             console.log("getuser")
             setUser(user);
+            setMounted(true);
         })
-    }, [setUser,authService,mounted]);
+    }, [setUser, authService, mounted]);
 
 
 
     const login = () => {
         console.log("login");
         debugger;
-        authService.login();
+        authService.current.login();
     }
 
     const logout = () => {
