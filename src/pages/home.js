@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useConfirm } from 'material-ui-confirm';
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 function Home() {
 
@@ -30,7 +30,7 @@ function Home() {
 
     useEffect(() => {
         getSalaries(filter);
-    }, []);
+    }, [filter]);
 
     const checkboxFilter = (value) => {
         switch (value) {
@@ -91,7 +91,7 @@ function Home() {
     const createFilter = f => {
         if (f.field === "b2b") {
             return (
-                <Select width="100px" id="select" name={f.Name} data-type='pawel' value={filter[f.field]} onChange={(e) => applyFilters(e, f.Type)}>
+                <Select width="100px" id="select" name={f.Name} data-type='pawel' value="" onChange={(e) => applyFilters(e, f.Type)}>
                     <MenuItem value="">Both</MenuItem>
                     <MenuItem value="true">Yes</MenuItem>
                     <MenuItem value="false">No</MenuItem>
@@ -115,7 +115,7 @@ function Home() {
                             {fields.map((field) => {
                                 return (
                                     <th key={field.field}>
-                                        <a href="#" onClick={() => applyOrder(field)}>  {field.Label}</a>
+                                        <button onClick={() => applyOrder(field)}>  {field.Label}</button>
                                     </th>)
                             })}
                         </tr>
@@ -148,12 +148,12 @@ function Home() {
                                 })}
                                 <td >
                                     <span>
-                                        <a href="#" onClick={() => handleEdit(item)}>Edit</a>
+                                        <button onClick={() => handleEdit(item)}>Edit</button>
                                     </span>
                                 </td>
                                 <td >
                                     <span>
-                                        <a href="#" onClick={() => handleDelete(item)}>Delete</a>
+                                        <button onClick={() => handleDelete(item)}>Delete</button>
                                     </span>
                                 </td>
                             </tr>

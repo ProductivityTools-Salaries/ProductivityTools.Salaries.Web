@@ -6,20 +6,18 @@ export default function Session(props) {
 
 
     let authService = new AuthService();
-
+    const [mounted,setMounted]=useState(true);
     const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        console.log("user l")
-        getUser();
-    }, []);
 
-    const getUser = () => {
+    useEffect(() => {
+        console.log("use effect")
         authService.getUser().then(user => {
-            console.log("user l")
+            console.log("getuser")
             setUser(user);
         })
-    }
+    }, [setUser,authService,mounted]);
+
 
 
     const login = () => {
