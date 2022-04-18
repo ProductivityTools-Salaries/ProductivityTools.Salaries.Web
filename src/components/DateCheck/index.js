@@ -15,6 +15,6 @@ export default function DateCheck() {
     }, [])
 
     return (
-        <span>Old code. Date time returned from Salaries API: {date ? date : `server hasn't responded yet`}</span>
+        <span>2022.04.18: Date time returned from Salaries API: {date ? date : `server hasn't responded yet`}</span>
     )
 }
