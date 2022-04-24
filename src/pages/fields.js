@@ -3,6 +3,7 @@ export const fields = [
     { Label: "Position", Type: "text", Name: "position", field: "position", readonly: false, filtered: true, width: '250px' },
     { Label: "Value", Type: "number", Name: "value", field: "value", readonly: false, filtered: false, width: '250px' },
     { Label: "Equity", Type: "number", Name: "equity", field: "equity", readonly: false, filtered: false, width: '250px' },
+    { Label: "Bonus", Type: "number", Name: "bonus", field: "bonus", readonly: false, filtered: false, width: '250px' },
     { Label: "Total", Type: "number", Name: "total", field: "total", readonly: true, filtered: false, width: '250px' },
     { Label: "B2b", Type: "checkbox", Name: "b2b", field: "b2b", readonly: false, filtered: true, width: '100px' },
     { Label: "Company", Type: "text", Name: "company", field: "company", readonly: false, filtered: true, width: '100px' },
