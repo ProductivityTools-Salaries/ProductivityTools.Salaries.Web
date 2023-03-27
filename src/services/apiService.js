@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { config } from '../Consts'
 import { toast } from 'react-toastify';
-import { AuthService } from './authService'
+import { auth } from '../firebase'
+
 
 async function getSalaries(filter) {
 
@@ -57,29 +58,24 @@ async function callAuthorizedEndpointWithToast(call, pendingMessage, successMess
 }
 
 async function callAuthorizedEndpoint(call) {
-    let authService = new AuthService();
-    return await authService.getUser().then(async user => {
-        if (user && user.access_token) {
-            const header = {
-                headers: { Authorization: `Bearer ${user.access_token}` }
-            };
-            try {
-                const result = await call(header);
-                return result;
-            }
-            catch (error) {
-                if (error.response != null && error.response.status === 401) {
-                    authService.logout();
-                    console.log("more code needed");
-                }
-                throw error;
-            }
+    console.log("auth", auth);
+    console.log("current user", auth.currentUser)
+    if (auth && auth.currentUser && auth.currentUser.accessToken) {
+        const header = {
+            headers: { Authorization: `Bearer ${auth.currentUser.accessToken}` }
+        };
+        try {
+            const result = await call(header);
+            return result;
         }
-        else {
-            console.log("user not in the storage, cannot perform authorized call, trying normal call");
-            return await call();
+        catch (error) {
+            console.log(error)
         }
-    })
+    }
+
+    else {
+        console.log("User not authenticated")
+    }
 }
 
 const exportedObject={
