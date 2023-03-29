@@ -1,17 +1,17 @@
 const dev = {
-    clientId:"devsalariesweb",
+   // clientId:"devsalariesweb",
     path_base:'https://localhost:5001',
-    stsAuthority: 'https://identityserver.productivitytools.tech:8010/',
-    clientRoot:'http://localhost:3000/',
-    clientScope:'openid profile Salaries.API'
+   // stsAuthority: 'https://identityserver.productivitytools.tech:8010/',
+   // clientRoot:'http://localhost:3000/',
+   // clientScope:'openid profile Salaries.API'
 }
 
 const prod = {
-    clientId:"prodsalariesweb",
-    path_base:'https://apisalaries.productivitytools.tech:8060',
-    stsAuthority: 'https://identityserver.productivitytools.tech:8010/',
-    clientRoot:'https://salariesweb.z35.web.core.windows.net/',
-    clientScope:'openid profile Salaries.API'
+   // clientId:"prodsalariesweb",
+    path_base:'https://apisalaries.productivitytools.top:8060',
+   // stsAuthority: 'https://identityserver.productivitytools.tech:8010/',
+  //  clientRoot:'https://salariesweb.z35.web.core.windows.net/',
+   // clientScope:'openid profile Salaries.API'
 }
 
 export const config = process.env.NODE_ENV === 'development' ? dev : prod;
