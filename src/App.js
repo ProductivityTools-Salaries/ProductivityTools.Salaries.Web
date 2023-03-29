@@ -18,6 +18,7 @@ function App() {
       <ConfirmProvider>
         <DateCheck />
         <p>{config.clientId}</p>
+        <p>version3.0</p>
         <Session>
           <Router>
             <Switch>

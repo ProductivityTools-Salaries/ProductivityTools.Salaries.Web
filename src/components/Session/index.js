@@ -18,9 +18,8 @@ export default function Session(props) {
     return (
         <span>
             <button onClick={login}>Login</button>
-            <button onClick={logout}>Logout</button>
-            <span>version2.0</span>
-            <span>User:{auth?.currentUser ? auth?.currentUser?.displayName : "is missing in session"}</span>
+            <button onClick={logout}>Logout</button>          
+             <span>User:{auth?.currentUser ? auth?.currentUser?.displayName : "is missing in session"}</span>
             <span>{auth?.currentUser?.email}</span>
             <div>{auth?.currentUser  ? props.children : "child not rendered"}</div>
         </span>
