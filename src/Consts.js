@@ -8,7 +8,7 @@ const dev = {
 
 const prod = {
    // clientId:"prodsalariesweb",
-    path_base:'https://apisalaries.productivitytools.top:8062',
+    path_base:'https://salaries-api.productivitytools.top',
    // stsAuthority: 'https://identityserver.productivitytools.tech:8010/',
   //  clientRoot:'https://salariesweb.z35.web.core.windows.net/',
    // clientScope:'openid profile Salaries.API'
