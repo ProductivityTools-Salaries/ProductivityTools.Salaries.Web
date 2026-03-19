@@ -10,13 +10,13 @@ import {
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC9jrzURk6uuduwysaQDHaGEIoEvYv2ibk",
-    authDomain: "ptsalariesprod.firebaseapp.com",
-    projectId: "ptsalariesprod",
-    storageBucket: "ptsalariesprod.appspot.com",
-    messagingSenderId: "296196078902",
-    appId: "1:296196078902:web:aa03fe076e07069e19c797"
-  };
+  apiKey: "AIzaSyBxY4oT4SZd5r-nZiM1eFFnUCcC3UxgYr4",
+  authDomain: "ptprojectsweb.firebaseapp.com",
+  projectId: "ptprojectsweb",
+  storageBucket: "ptprojectsweb.firebasestorage.app",
+  messagingSenderId: "93484780890",
+  appId: "1:93484780890:web:839cdea6ab70a8659ff763"
+};
 // Initialize Firebase
 console.log(firebaseConfig)
 const app = initializeApp(firebaseConfig);
