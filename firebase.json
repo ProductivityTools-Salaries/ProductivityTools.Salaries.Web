@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "project":"pt-salaries",
+    "site":"pt-salaries",
     "public": "build",
     "ignore": [
       "firebase.json",
